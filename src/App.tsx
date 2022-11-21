@@ -1,57 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useCallback, useState } from 'react';
+import TabsContent from './components/TabsContent';
+import TabSecond from './components/TabsContent/TabSecond';
+import TabsRow from './components/Tabs';
+import TopPanel from './components/HeaderPanel';
+import { Container } from './styled.globals/Container.styled';
+import TabFirst from './components/TabsContent/TabFirst';
+
+
 
 function App() {
+
+  const [selectedTab, setSelectedTab] = useState<number>(0);
+
+  const handleSelectTab = useCallback((value: number) => {
+    selectedTab !== value && setSelectedTab(value);
+  }, [selectedTab])
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Container>
+      <TopPanel />
+      <TabsRow handleSelectTab={handleSelectTab} selectedTab={selectedTab} />
+      <TabsContent>
+        {selectedTab === 0 && <TabFirst />}
+        {selectedTab === 1 && <TabSecond />}
+      </TabsContent>
+    </Container>
   );
 }
 

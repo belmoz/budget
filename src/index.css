@@ -1,13 +1,60 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import-normalize;
+
+@font-face {
+    font-family: 'Avenir Next';
+    font-style: normal;
+    font-weight: 400;
+    src: url(./fonts/AvenirNextLTProRegular400.woff2) format('woff2');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+    font-family: 'Avenir Next';
+    font-style: normal;
+    font-weight: 500;
+    src: url(./fonts/AvenirNextLTProMedium500.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Avenir Next';
+    font-style: normal;
+    font-weight: 600;
+    src: url(./fonts/AvenirNextLTProDemi600.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Avenir Next';
+    font-style: normal;
+    font-weight: 700;
+    src: url(./fonts/AvenirNextLTProBold700.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Avenir Next';
+    font-style: normal;
+    font-weight: 800;
+    src: url(./fonts/AvenirNextLTProHeavy800.woff2) format('woff2');
+}
+
+body {
+    margin: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Avenir Next', sans-serif;
 }
