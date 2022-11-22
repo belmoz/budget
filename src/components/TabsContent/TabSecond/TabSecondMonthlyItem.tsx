@@ -1,56 +1,11 @@
 import React, { FC, useLayoutEffect, useState } from 'react'
-import styled from 'styled-components';
 import penIcon from '../../../img/pen.svg';
 import dismissIcon from '../../../img/dismiss.svg';
 import confirmIcon from '../../../img/confirm.svg';
-import { InputField } from '../../../styled.globals/Input.styled';
 import { addSplitter, removeNonNumeric } from '../../../utils/contants';
 import { useAppDispatch } from '../../../redux/hooks';
 import { updateLocalSumAction } from '../../../redux/slices/channelsSlice';
-
-
-const TabSecondMonthlyItemWrapper = styled.div`
-    display: flex;
-    
-    &:hover > .tsmi__edit-icon {
-        opacity: 1;
-    }
-    
-`;
-const ConfirmIcons = styled.div`
-    display: flex;
-    height: 20px;
-    position: absolute;
-    left: 100%;
-    top: 50%;
-    translate: -14px -50%;
-    cursor: pointer;
-    & img {
-        &:last-child {
-            margin-left: 2px;
-        }
-    }
-`;
-const TabSecondInput = styled(InputField)`
-    padding: 5px;
-    height: 32px;
-    margin-left: -18px;
-`;
-
-const EditIcon = styled.img`
-    margin-left: 6px;
-    opacity: 0;
-    transition: all 0.3s ease 0s;
-    cursor: pointer;
-`;
-const TabSecondItem = styled.div`
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 90px;
-    min-width: 50px;
-    overflow: hidden;
-    cursor: pointer;
-`;
+import { ConfirmIcons, EditIcon, TabSecondInput, TabSecondItem, TabSecondMonthlyItemWrapper } from './styled/TabSecondMonthlyItem.styled';
 
 
 interface Props {
