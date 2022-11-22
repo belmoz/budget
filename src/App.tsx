@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import TabsContent from './components/TabsContent';
-import TabSecond from './components/TabsContent/TabSecond';
 import TabsRow from './components/Tabs';
 import TopPanel from './components/HeaderPanel';
 import { Container } from './styled.globals/Container.styled';
 import TabFirst from './components/TabsContent/TabFirst';
+import TabSecond from './components/TabsContent/TabSecond';
 
 
 
@@ -16,14 +16,17 @@ function App() {
     selectedTab !== value && setSelectedTab(value);
   }, [selectedTab])
 
+  const tabsComponents = [
+    <TabFirst />,
+    <TabSecond />
+  ]
 
   return (
     <Container>
       <TopPanel />
       <TabsRow handleSelectTab={handleSelectTab} selectedTab={selectedTab} />
       <TabsContent>
-        {selectedTab === 0 && <TabFirst />}
-        {selectedTab === 1 && <TabSecond />}
+        {tabsComponents[selectedTab]}
       </TabsContent>
     </Container>
   );
