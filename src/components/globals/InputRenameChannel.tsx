@@ -4,7 +4,8 @@ import dismissIcon from '../../img/dismiss.svg';
 import confirmIcon from '../../img/confirm.svg';
 import { renameChannelAction } from '../../redux/slices/channelsSlice';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
-import { InputIcons, InputRename, InputRenameChannelWrapper } from './styled/InputRenameChannel.styled';
+import { InputRename, InputRenameChannelWrapper } from './styled/InputRenameChannel.styled';
+import ConfirmButtons from './ConfirmButtons';
 
 
 interface Props {
@@ -22,6 +23,15 @@ const InputRenameChannel: FC<Props> = ({ title, id, handleClickEditChannel }) =>
 
     const handleRenameChannel = (e: ChangeEvent<HTMLInputElement>) => {
         setRenamedChannel(e.target.value);
+    }
+
+    const handleClickConfirm = () => {
+        disptach(renameChannelAction({ renamedChannel, id }));
+        handleClickEditChannel();
+    }
+    const handleClickDismiss = () => {
+        handleClickEditChannel();
+        setRenamedChannel(title);
     }
 
 
@@ -43,16 +53,13 @@ const InputRenameChannel: FC<Props> = ({ title, id, handleClickEditChannel }) =>
                     }
                 }}
             />
-            <InputIcons>
-                <img src={confirmIcon} alt="" onClick={() => {
-                    disptach(renameChannelAction({ renamedChannel, id }));
-                    handleClickEditChannel();
-                }} />
-                <img src={dismissIcon} alt="" onClick={() => {
-                    handleClickEditChannel();
-                    setRenamedChannel(title);
-                }} />
-            </InputIcons>
+            <ConfirmButtons
+                dismissIcon={dismissIcon}
+                confirmIcon={confirmIcon}
+                handleClickConfirm={handleClickConfirm}
+                handleClickDismiss={handleClickDismiss}
+                type={'big'}
+            />
         </InputRenameChannelWrapper>
     )
 }

@@ -9,21 +9,6 @@ display: flex;
 &:hover > .tsmi__edit-icon {
     opacity: 1;
 }
-
-`;
-export const ConfirmIcons = styled.div`
-display: flex;
-height: 20px;
-position: absolute;
-left: 100%;
-top: 50%;
-translate: -14px -50%;
-cursor: pointer;
-& img {
-    &:last-child {
-        margin-left: 2px;
-    }
-}
 `;
 export const TabSecondInput = styled(InputField)`
 padding: 5px;

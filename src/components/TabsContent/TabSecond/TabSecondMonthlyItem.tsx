@@ -1,11 +1,12 @@
-import React, { FC, useLayoutEffect, useState } from 'react'
+import React, { FC, KeyboardEvent, useLayoutEffect, useState } from 'react'
 import penIcon from '../../../img/pen.svg';
 import dismissIcon from '../../../img/dismiss.svg';
 import confirmIcon from '../../../img/confirm.svg';
 import { addSplitter, removeNonNumeric } from '../../../utils/contants';
 import { useAppDispatch } from '../../../redux/hooks';
 import { updateLocalSumAction } from '../../../redux/slices/channelsSlice';
-import { ConfirmIcons, EditIcon, TabSecondInput, TabSecondItem, TabSecondMonthlyItemWrapper } from './styled/TabSecondMonthlyItem.styled';
+import { EditIcon, TabSecondInput, TabSecondItem, TabSecondMonthlyItemWrapper } from './styled/TabSecondMonthlyItem.styled';
+import ConfirmButtons from '../../globals/ConfirmButtons';
 
 
 interface Props {
@@ -23,6 +24,16 @@ const TabSecondMonthlyItem: FC<Props> = ({ sum, id, index, isEditable, setIsEdit
 
     const [newData, setNewData] = useState<number>(sum);
     const [localId, setLocalId] = useState(`${id}-${index}`);
+
+
+    const handleClickConfirm = () => {
+        dispatch(updateLocalSumAction({ id, index, newData }));
+        setIsEditable(false);
+    }
+    const handleClickDismiss = () => {
+        setIsEditable(false);
+        setNewData(sum);
+    }
 
     useLayoutEffect(() => {
         setNewData(sum);
@@ -44,16 +55,12 @@ const TabSecondMonthlyItem: FC<Props> = ({ sum, id, index, isEditable, setIsEdit
                         }}
                         autoFocus
                     />
-                    <ConfirmIcons>
-                        <img src={confirmIcon} onClick={() => {
-                            dispatch(updateLocalSumAction({ id, index, newData }));
-                            setIsEditable(false);
-                        }} />
-                        <img src={dismissIcon} onClick={() => {
-                            setIsEditable(false);
-                            setNewData(sum);
-                        }} />
-                    </ConfirmIcons>
+                    <ConfirmButtons
+                        confirmIcon={confirmIcon}
+                        dismissIcon={dismissIcon}
+                        handleClickConfirm={handleClickConfirm}
+                        handleClickDismiss={handleClickDismiss}
+                    />
                 </> :
                 <>
                     <TabSecondItem onClick={() => handleSetEditable(id, index)}>
