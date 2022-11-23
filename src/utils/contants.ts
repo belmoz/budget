@@ -90,7 +90,12 @@ export const addSplitter = (value: number) => {
 export const date = new Date().toLocaleString("en-US", {
     year: '2-digit',
 });
-
+export const getLocalStorage = (key: string) => {
+    return JSON.parse(localStorage.getItem(key)!);
+}
+export const setLocalStorage = (key: string, data: any) => {
+    localStorage.setItem(key, JSON.stringify(data));
+}
 // export const
 // </functions> ==========================================================================================
 // <TEMP> ===========================================================================================

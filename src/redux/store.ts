@@ -1,13 +1,17 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { localStorageMiddleware } from "./middlewares/localStorageMiddleware";
 import { channelsSlice } from "./slices/channelsSlice";
 import { switcherSlice } from "./slices/switcherSlice";
-import { combineReducers } from '@reduxjs/toolkit'
+
+const rootReducer = combineReducers({
+    switcher: switcherSlice.reducer,
+    channels: channelsSlice.reducer
+});
+
 
 export const store = configureStore({
-    reducer: {
-        switcher: switcherSlice.reducer,
-        channels: channelsSlice.reducer
-    }
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(localStorageMiddleware.middleware)
 })
 
 

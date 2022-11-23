@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IBudget, IChannel } from "../../types/channel.interface";
+import { getLocalStorage } from "../../utils/contants";
 
 
 const initialState: IChannel[] = [
@@ -120,7 +121,7 @@ function nextChannelId(channels: IChannel[]) {
 
 export const channelsSlice = createSlice({
     name: 'channels',
-    initialState,
+    initialState: getLocalStorage('channels') || initialState,
     reducers: {
         addChannelAction: (state, { payload }: PayloadAction<string>) => {
             state.push({
@@ -179,22 +180,22 @@ export const channelsSlice = createSlice({
             })
         },
         removeChannelAction: (state, { payload }: PayloadAction<number>) => {
-            const index = state.findIndex(el => el.id === payload)
+            const index = state.findIndex((el: IChannel) => el.id === payload)
             state.splice(index, 1);
         },
         updateBudgetAction: (state, { payload }: PayloadAction<{ id: number, localBudget: IBudget[] }>) => {
-            const index = state.findIndex(el => el.id === payload.id)
+            const index = state.findIndex((el: IChannel) => el.id === payload.id)
             state[index].budget = payload.localBudget;
         },
         updateLocalSumAction: (state, { payload }: PayloadAction<{ id: number, index: number, newData: number }>) => {
-            const indexChannel = state.findIndex(el => el.id === payload.id);
+            const indexChannel = state.findIndex((el: IChannel) => el.id === payload.id);
             state[indexChannel].budget[payload.index].sum = payload.newData;
         },
         renameChannelAction: (state, { payload }) => {
-            const index = state.findIndex(el => el.id === payload.id)
+            const index = state.findIndex((el: IChannel) => el.id === payload.id)
             state[index].title = payload.renamedChannel.trim()
         }
-    }
+    },
 })
 
 export const { addChannelAction, removeChannelAction, updateBudgetAction, updateLocalSumAction, renameChannelAction } = channelsSlice.actions;

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAppSelector } from '../../../redux/hooks';
+import { IChannel } from '../../../types/channel.interface';
 import { TabFirstWrapper } from './styled/index.styled';
 import TabFirstChannel from './TabFirstChannel';
 
@@ -16,7 +17,7 @@ const TabFirst = () => {
 
     return (
         <TabFirstWrapper>
-            {channels.map((ch, i) => (
+            {channels.map((ch: IChannel, i: number) => (
                 <TabFirstChannel
                     key={i}
                     channel={ch}

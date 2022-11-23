@@ -6,6 +6,7 @@ import chIcon from '../../../img/channel_icon.svg';
 import arrowIconNext from '../../../img/arrow_prev_next.svg';
 import TabSecondMonthlyItem from './TabSecondMonthlyItem';
 import { ArrowIconNext, ArrowIconPrev, TableBody, TableFirst, TableHeader, TableItem, TableRow, TableSecond, TableSecondWrapper, TableTitle, TabSecondMainWrapper } from './styled/TabSecondMain.styled';
+import { IBudget, IChannel } from '../../../types/channel.interface';
 
 
 
@@ -30,7 +31,7 @@ const TabSecondMain = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {channels.map((ch, i) => (
+                    {channels.map((ch: IChannel, i: number) => (
                         <TableRow key={i}>
                             <TableItem>
                                 <ChannelIcon icon={chIcon} />
@@ -48,9 +49,9 @@ const TabSecondMain = () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {channels.map((ch, i) => (
+                        {channels.map((ch: IChannel, i: number) => (
                             <TableRow key={i}>
-                                {ch.budget.map((b, i) => (
+                                {ch.budget.map((b: IBudget, i: number) => (
                                     <TableItem key={i}>
                                         <TabSecondMonthlyItem sum={b.sum} id={ch.id} index={i} isEditable={isEditable} setIsEditable={setIsEditable} handleSetEditable={handleSetEditable} />
                                     </TableItem>
